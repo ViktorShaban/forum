@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Document   : answersAdmin
+    Created on : 02.03.2015, 18:44:08
+    Author     : Виктор
+-->
+<jsp:root  xmlns:jsp="http://java.sun.com/JSP/Page"
+           xmlns:c="http://java.sun.com/jsp/jstl/core"
+           version="2.0">
+
+    <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+
+    <!-- any content can be specified here, e.g.: -->
+    <jsp:element name="text">
+        <jsp:attribute name="lang">EN</jsp:attribute>
+        <jsp:body> 
+            <html xmlns="http://www.w3.org/1999/xhtml">
+                <head>
+                    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                    <title>Journal</title>
+                    <link href="tableSt.css" rel="stylesheet" type="text/css"/>
+                    <link href="st1.css" rel="stylesheet" type="text/css" />
+                </head>
+                <body  background = "images.jpg">
+                    <form name="LogOutForm" method="POST" action="Controller">
+                        <p align = "right">
+                            <button name="command" value="logOut" >LogOut</button>
+                        </p>
+                    </form>
+                    <hr/>
+                    <H1 align = "center">Forum</H1>
+                    <hr/>
+                    <form name="ForumForm" method="GET" action="Controller">
+                        <table align="center" class="CSSTableGenerator" >
+                            <tr>
+                                <th width="156" scope="col">Answers</th>
+                                <th width="33" scope="col" >Date</th>
+                                <td></td>
+                            </tr>
+                            <c:forEach var="answers" items="${answersList}">
+                                <tr>
+                                    <td width="156">
+                                        <span style="color: #CC3333;"><strong>
+                                                ${answers.getUserLogin()}</strong>
+                                        </span>,
+                                        ${answers.getMessageText()}
+                                    </td>
+                                    <td width="33">${answers.getMessageDate()}</td>
+                                    <td>${answers.getAnswerId()}<INPUT type="radio"
+                                                                       name="chooseAnswerAdminRadioButton" 
+                                                                       value="${answers.getAnswerId()}"></INPUT></td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                        <p align="center">
+                            <button name="command" value="deleteAnswerAdmin" class="myButton">Delete Answer</button>
+                            <button  name="command" value="goBackToQuestionsAdmin" class="myButton" >Back</button>
+                        </p>
+                    </form>
+
+
+                </body>
+            </html></jsp:body>
+    </jsp:element>
+
+</jsp:root>

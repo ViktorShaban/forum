@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Document   : questions
+    Created on : 25.02.2015, 13:17:28
+    Author     : Виктор
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          version="2.0">
+
+    <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+
+    <!-- any content can be specified here, e.g.: -->
+    <jsp:element name="text">
+        <jsp:attribute name="lang">EN</jsp:attribute>
+        <jsp:body> 
+            <html xmlns="http://www.w3.org/1999/xhtml">
+                <head>
+                    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                    <title>Journal</title>
+                    <link href="tableSt.css" rel="stylesheet" type="text/css"/>
+                    <link href="st1.css" rel="stylesheet" type="text/css" />
+                </head>
+                <body  background = "images.jpg">
+                    <form name="LogOutForm" method="POST" action="Controller">
+                        <p align = "right">
+                            <button name="command" value="logOut" >LogOut</button>
+                        </p>
+                    </form>
+                    <hr/>
+                    <H1 align = "center">Forum</H1>
+
+                    <hr/>
+                    <form name="JournalForm" method="GET" action="Controller">
+                        <table align="center" class="CSSTableGenerator" >
+                            <tr>
+                                <th width="156" scope="col">Questions</th>
+                                <th width="33" scope="col" >Date</th>
+                                 <th width="33" scope="col" ></th>
+                            </tr>
+                            <c:forEach var="questions" items="${quastionsList}">
+                                <tr>
+                                    <td width="156" >
+                                        <c:set var="questionId" value="${questions.getQuestionId()}"/>
+                                        <a href="Controller?questionId=${questionId}&amp;command=answersAdminLink"> ${questions.getMessageText()} 
+                                        </a>
+                                    </td>
+                                    <td width="33">${questions.getMessageDate()}</td>
+                                    <td width="33" > <INPUT type="radio"
+                                                            name="chooseQuestionRadioButton" 
+                                                            value="${questions.getQuestionId()}"></INPUT></td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                        <p align="center">
+                            
+                            <button name="command"  value="deleteAdminQuestion" class="myButton">Delete Question</button>
+                            <button name="command" value="goBackToTopicsAdmin" class="myButton" >Back</button>
+                        </p>
+                    </form>
+                </body>
+            </html></jsp:body>
+    </jsp:element>
+
+</jsp:root>

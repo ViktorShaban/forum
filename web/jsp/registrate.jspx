@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Document   : registrate
+    Created on : 24.02.2015, 23:07:46
+    Author     : Виктор
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+
+    <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+
+    <!-- any content can be specified here, e.g.: -->
+    <jsp:element name="text">
+        <jsp:attribute name="lang">EN</jsp:attribute>
+        <jsp:body><html>
+                <head>
+                    <title>JSP Page</title>
+                    <link href="st1.css" rel="stylesheet" type="text/css" />
+                </head>
+                <body background = "images.jpg">
+                    <hr></hr><H3>Registration</H3><hr></hr>
+                    <form name="registrationForm" method="POST" action="Controller">
+                        <h3>${errorLog}</h3>
+                        <table align="left">
+                            <tr>
+                                <td>
+                                    Name
+                                </td>
+                                <td>
+                                    <input type="text" name="userName" value="${userName}"/><br/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Login
+                                </td>
+                                <td>
+                                    <input type="text" name="loginReg" value="${userLogin}"/><br/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Password
+                                </td>
+                                <td>
+                                    <input type="password" name="passwordReg" value=""/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Confirm password
+                                </td>
+                                <td>
+                                    <input type="password" name="confirmPassword" value=""/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="hidden" name="command" value="registrate"/>
+                                    <input type="submit" class="myButton" value="Registrate"/>
+                                </td>
+                                <td>
+                                    <input type="button" name="repeat" class="myButton" value=" Назад " OnClick="history.go(-1);"></input>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </body>
+            </html>
+        </jsp:body>
+    </jsp:element>
+
+</jsp:root>
