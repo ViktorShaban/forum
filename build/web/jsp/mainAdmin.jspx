@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Document   : main
+    Created on : 25.02.2015, 12:26:56
+    Author     : Виктор
+-->
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          version="2.0">
+
+    <jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+
+    <!-- any content can be specified here, e.g.: -->
+    <jsp:element name="text">
+        <jsp:attribute name="lang">EN</jsp:attribute>
+        <jsp:body> 
+            <html xmlns="http://www.w3.org/1999/xhtml">
+                <head>
+                    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                    <title>Journal</title>
+                    <link href="tableSt.css" rel="stylesheet" type="text/css"/>
+                    <link href="st1.css" rel="stylesheet" type="text/css" />
+                </head>
+
+                <body background = "images.jpg">
+                    <form name="LogOutForm" method="POST" action="Controller">
+                        <p align = "right">
+                            <button name="command" value="logOut" >LogOut</button>
+                        </p>
+                    </form>
+                    <hr/>
+                    <H1 align = "center">Forum</H1>
+                    <h5 align = "left"> Hello,${userName}!!!</h5>
+                    <h1 align = "left"> ${error}</h1>
+                    <hr/>
+                    <form name="JournalForm" method="GET" action="Controller">
+                        <table align="center" class="CSSTableGenerator" >
+                            <tr>
+                                <th width="33" scope="col">Topic name</th>
+                                <th width="33" scope="col" >Date</th>
+                                <th></th>
+                            </tr>
+                            <c:forEach var="messages" items="${topicsList}">
+                                <tr>
+                                    <td width="33" >
+                                        <c:set var="topicId" value="${messages.getRecordId()}"/>
+                                        <a href="Controller?topicId=${topicId}&amp;command=quastionsAdminLink">${messages.getMessageText()}</a> 
+                                    </td>
+                                    <td width="33">${messages.getMessageDate()}</td>
+                                    <td width="33" > <INPUT type="radio"
+                                                            name="chooseTopicRadioButton" 
+                                                            value="${messages.getRecordId()}"></INPUT></td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                        <p align ="center">
+                            <textarea name="textArQuestion" value ="" cols="100" rows="5" >Enter Message</textarea><br/>
+                            <button name="command" value="addTopic" class="myButton">Add Topic</button>
+                            <button name="command" value="deleteTopic" class="myButton" >Delete Topic</button>
+                        </p>
+                    </form>
+                    <form name="JournalForm" method="GET" action="Controller">
+                        <table align="center" class="CSSTableGenerator" >
+                            <tr>
+                                <th width="33" scope="col">User Login</th>
+                                <th width="33" scope="col" >User Password</th>
+                                <th width="33">User Name</th>
+                                <th width="33">User Registration Date</th>
+                                <th width="33">User Is admin</th>
+                                <th width="33"></th>
+                            </tr>
+                            <c:forEach var="user" items="${usersList}">
+                                <tr>
+                                    <td width="33" >
+                                        ${user.getUserLogin()} 
+                                    </td>
+                                    <td width="33">${user.getUserPassword()}</td>
+                                    <td width="33" >
+                                        ${user.getUserName()} 
+                                    </td>
+                                    <td width="33" >
+                                        ${user.getUserRegistrationdate()} 
+                                    </td>
+                                    <td width="33" >
+                                        ${user.getUserIsadmin()} 
+                                    </td>
+                                    <td width="33" > <INPUT type="radio"
+                                                            name="chooseUserRadioButton" 
+                                                            value="${user.getUserLogin()}"></INPUT></td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                        <br/>
+                        <p align ="center">
+                            <button name="command" value="viewAllUsers" class="myButton">View All Users</button>
+                            <button name="command" value="setAdmin" class="myButton">Set Admin</button>
+                            <button name="command" value="setUser" class="myButton">Set User</button>
+                        </p>
+                    </form>
+                </body>
+            </html>
+        </jsp:body>
+    </jsp:element>
+
+</jsp:root>
